@@ -147,6 +147,21 @@ session.stopRecording()
 
 You can get the current record status via the `isRecording` property to determine if a recording is in progress or not.
 
+# Session properties and methods
+
+| CKPhotoSession                                   | CKVideoSession                                                  |
+|--------------------------------------------------|-----------------------------------------------------------------|
+| `zoom: Double`                                   | `zoom: Double`                                                  |
+| `resolution: CGSize?`                            | `isRecording: Bool`                                             |
+| `cameraPosition: CameraPosition`                 | `cameraPosition: CameraPosition`                                |
+| `cameraDetection: CameraDetection`               | `flashMode: FlashMode`                                          |
+| `flashMode: FlashMode`                           | `start()`                                                       |
+| `start()`                                        | `stop()`                                                        |
+| `stop()`                                         | `togglePosition()`                                              |
+| `focus(at point: CGPoint)`                       | `setWidth(_ width: Int, height: Int, frameRate: Int)`           |
+| `togglePosition()`                               | `record(url: URL? = nil, _ callback: @escaping RecordCallback)` |
+| `capture(_ callback: @escaping CaptureCallback)` | `stopRecording()`                                               |
+
 # Creating custom sessions
 
 CameraKit can be splitted into 2 main pieces: preview and sessions. The sessions are made by extending the base `CKSession` class. If you want a custom session you can extend the `CKSession` class and use its static helpers to initialize yours. Or you can also extend the built-in sessions and add custom logic.
