@@ -17,16 +17,18 @@ CameraKit helps you add reliable camera to your app quickly. Our open source cam
 
 With CameraKit you are able to effortlessly do the following: 
 
-- Ability to extend and create custom sessions.
-- Image and video capture seamlessly working with the same preview session.
-- Automatic system permission handling.
-- Automatic preview scaling.
-- Built-in face detection.
-- Built-in overlay grid.
-- Built-in tap to focus.
-- Built-in pinch to zoom.
-- Built-in flash toggle for both photos and videos.
-- Built-in camera position toggle.
+- ✅ Ability to extend and create custom sessions.
+- ✅ Image and video capture seamlessly working with the same preview session.
+- ✅ Automatic system permission handling.
+- ✅ Automatic preview scaling.
+- 📷 Ability to set a custom resolution for capturing photos.
+- 📹 Ability to set resolution/frame rate for capturing videos.
+- 👱‍ Built-in face detection.
+- 📐 Built-in overlay grid.
+- 👆 Built-in tap to focus.
+- 🔍 Built-in pinch to zoom.
+- 📸 Built-in flash toggle for both photos and videos.
+- 🤳 Built-in camera position toggle.
 
 ## Sponsored By
 <a href="https://www.expensify.com/"><img alt="Expensify" src=".repo/gh-readme-expensify-logo.svg" height="45px" width="375px" align="center"></a>
