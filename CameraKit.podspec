@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CameraKit"
-  s.version      = "0.1"
+  s.version      = "1.0.0"
   s.summary      = "Camera library for iOS written in pure Swift."
 
   # This description is used to generate tags and improve search results.
@@ -53,10 +53,10 @@ Easy to work with, camera library for iOS written in pure Swift.
   #  profile URL.
   #
 
-  s.author             = { "Adrian Mateoaea" => "adrianmateoaea24@gmail.com" }
-  # Or just: s.author    = "Adrian Mateoaea"
+  s.author             = { "Alterac, Inc" => "hello@camerakit.io" }
+  # Or just: s.author    = "Alterac, Inc."
   # s.authors            = { "Adrian Mateoaea" => "adrianmateoaea24@gmail.com" }
-  # s.social_media_url   = "http://twitter.com/Adrian Mateoaea"
+  s.social_media_url   = "http://twitter.com/withcamerakit"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
