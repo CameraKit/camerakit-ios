@@ -63,7 +63,7 @@ pod init
 Then open the `Podfile` file in your project and add this line to your app target:
 
 ```ruby
-pod CameraKit
+pod CameraKit-iOS
 ```
 
 and it will automatically create a `Podfile` and integrate the pods into the project by creating a separate `.xcworkspace` file. You will open this file in Xcode from now on.
