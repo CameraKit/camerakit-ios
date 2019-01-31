@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "CameraKit"
+  s.name         = "CameraKit-iOS"
   s.version      = "1.0.0"
   s.summary      = "Camera library for iOS written in pure Swift."
 
