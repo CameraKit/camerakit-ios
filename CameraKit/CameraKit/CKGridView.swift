@@ -8,20 +8,20 @@
 
 import UIKit
 
-public class CKGridView: UIView {
+@objc public class CKGridView: UIView {
     
-    public var color: UIColor = UIColor.white.withAlphaComponent(0.5) {
+    @objc public var color: UIColor = UIColor.white.withAlphaComponent(0.5) {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
-    public override init(frame: CGRect) {
+    @objc public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupView()
     }

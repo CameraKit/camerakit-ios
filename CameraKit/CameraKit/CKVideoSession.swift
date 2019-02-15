@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-extension CKVideoSession.FlashMode {
+extension CKSession.FlashMode {
     
     var captureTorchMode: AVCaptureDevice.TorchMode {
         switch self {
@@ -19,17 +19,13 @@ extension CKVideoSession.FlashMode {
     }
 }
 
-public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
-    
-    public enum FlashMode {
-        case off, on, auto
-    }
+@objc public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     
     public typealias RecordCallback = (URL?, CKError?) -> Void
     
-    public private(set) var isRecording = false
+    @objc public private(set) var isRecording = false
     
-    public var cameraPosition = CameraPosition.back {
+    @objc public var cameraPosition = CameraPosition.back {
         didSet {
             do {
                 let deviceInput = try CKSession.captureDeviceInput(type: self.cameraPosition.deviceType)
@@ -52,7 +48,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    public override var zoom: Double {
+    @objc public override var zoom: Double {
         didSet {
             guard let device = self.captureDeviceInput?.device else {
                 return
@@ -72,7 +68,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    public var flashMode = FlashMode.off {
+    @objc public var flashMode = CKSession.FlashMode.off {
         didSet {
             guard let device = self.captureDeviceInput?.device else {
                 return
@@ -94,7 +90,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     
     var recordCallback: RecordCallback?
     
-    public init(position: CameraPosition = .back) {
+    @objc public init(position: CameraPosition = .back) {
         super.init()
         
         defer {
@@ -112,6 +108,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         self.session.addOutput(self.movieOutput)
     }
     
+    // TODO: Fix mark as @objc
     public func record(url: URL? = nil, _ callback: @escaping RecordCallback) {
         if self.isRecording { return }
         self.recordCallback = callback
@@ -126,16 +123,16 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         self.movieOutput.startRecording(to: fileUrl, recordingDelegate: self)
     }
     
-    public func stopRecording() {
+    @objc public func stopRecording() {
         if !self.isRecording { return }
         self.movieOutput.stopRecording()
     }
     
-    public func togglePosition() {
+    @objc public func togglePosition() {
         self.cameraPosition = self.cameraPosition == .back ? .front : .back
     }
     
-    public func setWidth(_ width: Int, height: Int, frameRate: Int) {
+    @objc public func setWidth(_ width: Int, height: Int, frameRate: Int) {
         guard
             let input = self.captureDeviceInput,
             let format = CKSession.deviceInputFormat(input: input, width: width, height: height, frameRate: frameRate)
