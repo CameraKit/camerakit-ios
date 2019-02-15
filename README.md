@@ -29,6 +29,7 @@ With CameraKit you are able to effortlessly do the following:
 - 🔍 Built-in pinch to zoom.
 - 📸 Built-in flash toggle for both photos and videos.
 - 🤳 Built-in camera position toggle.
+- 🖥 Objective-C compatible.
 
 ## Sponsored By
 <a href="https://www.expensify.com/"><img alt="Expensify" src=".repo/gh-readme-expensify-logo.svg" height="45px" width="375px" align="center"></a>
@@ -161,6 +162,10 @@ You can get the current record status via the `isRecording` property to determin
 | `focus(at point: CGPoint)`                       | `setWidth(_ width: Int, height: Int, frameRate: Int)`           |
 | `togglePosition()`                               | `record(url: URL? = nil, _ callback: @escaping RecordCallback)` |
 | `capture(_ callback: @escaping CaptureCallback)` | `stopRecording()`                                               |
+
+# Import into Objective-C projects
+
+Go to `Project Settings`, `Build Settings`, `Always Embed Swift Standard Libraries` and set the value to `Yes`.
 
 # Creating custom sessions
 
