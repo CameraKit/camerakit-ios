@@ -29,6 +29,7 @@ With CameraKit you are able to effortlessly do the following:
 - 🔍 Built-in pinch to zoom.
 - 📸 Built-in flash toggle for both photos and videos.
 - 🤳 Built-in camera position toggle.
+- 🖥 Objective-C compatible.
 
 ## Sponsored By
 <a href="https://www.expensify.com/"><img alt="Expensify" src=".repo/gh-readme-expensify-logo.svg" height="45px" width="375px" align="center"></a>
@@ -124,8 +125,10 @@ override func viewDidLoad() {
 For capturing a image using the `CKPhotoSession` class use this code below:
 
 ```swift
-session.capture { (image, settings, error) in
+session.capture({ (image, settings) in
     // TODO: Add your code here
+}) { (error) in
+    // TODO: Handle error
 }
 ```
 
@@ -133,8 +136,10 @@ If you want to record a video using the `CKVideoSession` class use this code bel
 
 ```swift
 // You can also specify a custom url for where to save the video file
-session.record() { (url, error) in
+session.record(url: URL(string: ""), { (url) in
     // TODO: Add your code here
+}) { (error) in
+    // TODO: Handle error
 }
 ```
 
@@ -149,18 +154,28 @@ You can get the current record status via the `isRecording` property to determin
 
 # Session properties and methods
 
-| CKPhotoSession                                   | CKVideoSession                                                  |
-|--------------------------------------------------|-----------------------------------------------------------------|
-| `zoom: Double`                                   | `zoom: Double`                                                  |
-| `resolution: CGSize?`                            | `isRecording: Bool`                                             |
-| `cameraPosition: CameraPosition`                 | `cameraPosition: CameraPosition`                                |
-| `cameraDetection: CameraDetection`               | `flashMode: FlashMode`                                          |
-| `flashMode: FlashMode`                           | `start()`                                                       |
-| `start()`                                        | `stop()`                                                        |
-| `stop()`                                         | `togglePosition()`                                              |
-| `focus(at point: CGPoint)`                       | `setWidth(_ width: Int, height: Int, frameRate: Int)`           |
-| `togglePosition()`                               | `record(url: URL? = nil, _ callback: @escaping RecordCallback)` |
-| `capture(_ callback: @escaping CaptureCallback)` | `stopRecording()`                                               |
+| CKPhotoSession | CKVideoSession |
+|----------------|----------------|
+| `zoom: Double` | `zoom: Double` |
+| `resolution: CGSize` | `isRecording: Bool` |
+| `cameraPosition: CameraPosition` | `cameraPosition: CameraPosition` |
+| `cameraDetection: CameraDetection` | `flashMode: FlashMode` |
+| `flashMode: FlashMode` | `start()` |
+| `start()` | `stop()` |
+| `stop()` | `togglePosition()` |
+| `focus(at point: CGPoint)` | `setWidth(_ width: Int, height: Int, frameRate: Int)` |
+| `togglePosition()` | `record(url: URL? = nil, _ callback: @escaping (URL) -> Void, error: @escaping (Error) -> Void)` |
+| `capture(_ callback: @escaping (UIImage, AVCaptureResolvedPhotoSettings) -> Void, _ error: @escaping (Error) -> Void)` | `stopRecording()` |
+
+# Import into Objective-C projects
+
+Go to `Project Settings`, `Build Settings`, `Always Embed Swift Standard Libraries` and set the value to `Yes`.
+
+Then import the CameraKit framework using:
+
+```objc
+@import CameraKit;
+```
 
 # Creating custom sessions
 

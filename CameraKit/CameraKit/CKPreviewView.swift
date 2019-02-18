@@ -9,11 +9,11 @@
 import UIKit
 import AVFoundation
 
-public class CKPreviewView: UIView {
+@objc public class CKPreviewView: UIView {
     
     private var lastScale: CGFloat = 1.0
     
-    private(set) public var previewLayer: AVCaptureVideoPreviewLayer? {
+    @objc private(set) public var previewLayer: AVCaptureVideoPreviewLayer? {
         didSet {
             oldValue?.removeFromSuperlayer()
             
@@ -23,7 +23,7 @@ public class CKPreviewView: UIView {
         }
     }
     
-    public var session: CKSession? {
+    @objc public var session: CKSession? {
         didSet {
             oldValue?.stop()
             
@@ -36,7 +36,7 @@ public class CKPreviewView: UIView {
         }
     }
     
-    private(set) public var gridView: CKGridView? {
+    @objc private(set) public var gridView: CKGridView? {
         didSet {
             oldValue?.removeFromSuperview()
             
@@ -46,7 +46,7 @@ public class CKPreviewView: UIView {
         }
     }
     
-    public var showGrid: Bool = false {
+    @objc public var showGrid: Bool = false {
         didSet {
             if self.showGrid == oldValue {
                 return
@@ -60,12 +60,12 @@ public class CKPreviewView: UIView {
         }
     }
     
-    public override init(frame: CGRect) {
+    @objc public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupView()
     }

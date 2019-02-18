@@ -51,50 +51,54 @@ extension CKSession.CameraPosition {
     }
 }
 
-public protocol CKSessionDelegate: class {
-    func didChangeValue(session: CKSession, value: Any, key: String)
+@objc public protocol CKSessionDelegate: class {
+    @objc func didChangeValue(session: CKSession, value: Any, key: String)
 }
 
-public class CKSession: NSObject {
+@objc public class CKSession: NSObject {
     
-    public enum DeviceType {
+    @objc public enum DeviceType: UInt {
         case frontCamera, backCamera, microphone
     }
     
-    public enum CameraPosition {
+    @objc public enum CameraPosition: UInt {
         case front, back
     }
     
-    public let session: AVCaptureSession
+    @objc public enum FlashMode: UInt {
+        case off, on, auto
+    }
     
-    public var previewLayer: AVCaptureVideoPreviewLayer?
-    public var overlayView: UIView?
+    @objc public let session: AVCaptureSession
     
-    public var zoom = 1.0
+    @objc public var previewLayer: AVCaptureVideoPreviewLayer?
+    @objc public var overlayView: UIView?
     
-    public weak var delegate: CKSessionDelegate?
+    @objc public var zoom = 1.0
     
-    override init() {
+    @objc public weak var delegate: CKSessionDelegate?
+    
+    @objc override init() {
         self.session = AVCaptureSession()
     }
     
-    deinit {
+    @objc deinit {
         self.session.stopRunning()
     }
     
-    public func start() {
+    @objc public func start() {
         self.session.startRunning()
     }
     
-    public func stop() {
+    @objc public func stop() {
         self.session.stopRunning()
     }
     
-    public func focus(at point: CGPoint) {
+    @objc public func focus(at point: CGPoint) {
         //
     }
     
-    public static func captureDeviceInput(type: DeviceType) throws -> AVCaptureDeviceInput {
+    @objc public static func captureDeviceInput(type: DeviceType) throws -> AVCaptureDeviceInput {
         let captureDevices = AVCaptureDevice.DiscoverySession(
             deviceTypes: [type.captureDeviceType],
             mediaType: type.captureMediaType,
@@ -107,7 +111,7 @@ public class CKSession: NSObject {
         return try AVCaptureDeviceInput(device: captureDevice)
     }
     
-    public static func deviceInputFormat(input: AVCaptureDeviceInput, width: Int, height: Int, frameRate: Int = 30) -> AVCaptureDevice.Format? {
+    @objc public static func deviceInputFormat(input: AVCaptureDeviceInput, width: Int, height: Int, frameRate: Int = 30) -> AVCaptureDevice.Format? {
         for format in input.device.formats {
             let dimension = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
             if dimension.width >= width && dimension.height >= height {
