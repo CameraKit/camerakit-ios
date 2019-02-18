@@ -26,8 +26,6 @@ extension CKSession.FlashMode {
         case none, faces
     }
     
-    public typealias CaptureCallback = (UIImage?, AVCaptureResolvedPhotoSettings?, CKError?) -> Void
-    
     @objc public var cameraPosition = CameraPosition.back {
         didSet {
             do {
@@ -83,7 +81,6 @@ extension CKSession.FlashMode {
     
     let photoOutput = AVCapturePhotoOutput()
     
-    var captureCallback: CaptureCallback?
     var faceDetectionBoxes: [UIView] = []
     
     @objc public init(position: CameraPosition = .back, detection: CameraDetection = .none) {
@@ -102,13 +99,16 @@ extension CKSession.FlashMode {
         self.faceDetectionBoxes.forEach({ $0.removeFromSuperview() })
     }
     
-    // TODO: Fix mark as @objc
-    public func capture(_ callback: @escaping CaptureCallback) {
+    var captureCallback: (UIImage, AVCaptureResolvedPhotoSettings) -> Void = { (_, _) in }
+    var errorCallback: (Error) -> Void = { (_) in }
+    
+    @objc public func capture(_ callback: @escaping (UIImage, AVCaptureResolvedPhotoSettings) -> Void, _ error: @escaping (Error) -> Void) {
         self.captureCallback = callback
-        
+        self.errorCallback = error
+
         let settings = AVCapturePhotoSettings()
         settings.flashMode = self.flashMode.captureFlashMode
-        
+
         self.photoOutput.capturePhoto(with: settings, delegate: self)
     }
     
@@ -136,8 +136,7 @@ extension CKSession.FlashMode {
         }
     }
     
-    // TODO: Fix mark as @objc
-    public var resolution: CGSize? {
+    @objc public var resolution = CGSize.zero {
         didSet {
             guard let deviceInput = self.captureDeviceInput else {
                 return
@@ -147,8 +146,8 @@ extension CKSession.FlashMode {
                 try deviceInput.device.lockForConfiguration()
                 
                 if
-                    let resolution = self.resolution,
-                    let format = CKSession.deviceInputFormat(input: deviceInput, width: Int(resolution.width), height: Int(resolution.height))
+                    self.resolution.width > 0, self.resolution.height > 0,
+                    let format = CKSession.deviceInputFormat(input: deviceInput, width: Int(self.resolution.width), height: Int(self.resolution.height))
                 {
                     deviceInput.device.activeFormat = format
                 } else {
@@ -176,73 +175,65 @@ extension CKSession.FlashMode {
     }
     
     @available(iOS 11.0, *)
-    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        
-        guard let captureCallback = self.captureCallback else {
-            return
+    public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        defer {
+            self.captureCallback = { (_, _) in }
+            self.errorCallback = { (_) in }
         }
-        
-        defer { self.captureCallback = nil }
-        
+
         if let error = error {
-            captureCallback(nil, nil, CKError.error(error.localizedDescription))
+            self.errorCallback(error)
             return
         }
-        
+
         guard let data = photo.fileDataRepresentation() else {
-            captureCallback(nil, nil, CKError.error("Cannot get photo file data representation"))
+            self.errorCallback(CKError.error("Cannot get photo file data representation"))
             return
         }
-        
+
         self.processPhotoData(data: data, resolvedSettings: photo.resolvedSettings)
     }
     
-    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
-        
-        guard let captureCallback = self.captureCallback else {
-            return
+    public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        defer {
+            self.captureCallback = { (_, _) in }
+            self.errorCallback = { (_) in }
         }
-        
-        defer { self.captureCallback = nil }
-        
+
         if let error = error {
-            captureCallback(nil, nil, CKError.error(error.localizedDescription))
+            self.errorCallback(error)
             return
         }
-        
+
         guard
             let photoSampleBuffer = photoSampleBuffer, let previewPhotoSampleBuffer = previewPhotoSampleBuffer,
             let data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) else
         {
-            captureCallback(nil, nil, CKError.error("Cannot get photo file data representation"))
+            self.errorCallback(CKError.error("Cannot get photo file data representation"))
             return
         }
-        
+
         self.processPhotoData(data: data, resolvedSettings: resolvedSettings)
     }
     
     private func processPhotoData(data: Data, resolvedSettings: AVCaptureResolvedPhotoSettings) {
-        guard let captureCallback = self.captureCallback else {
-            return
-        }
-        
         guard let image = UIImage(data: data) else {
-            captureCallback(nil, nil, CKError.error("Cannot get photo"))
+            self.errorCallback(CKError.error("Cannot get photo"))
             return
         }
-        
+
         if
-            let resolution = self.resolution,
-            let transformedImage = CKUtils.cropAndScale(image, width: Int(resolution.width), height: Int(resolution.height))
+            self.resolution.width > 0, self.resolution.height > 0,
+            let transformedImage = CKUtils.cropAndScale(image, width: Int(self.resolution.width), height: Int(self.resolution.height))
         {
-            captureCallback(transformedImage, resolvedSettings, nil)
+            self.captureCallback(transformedImage, resolvedSettings)
             return
         }
-        
-        captureCallback(image, resolvedSettings, nil)
+
+        self.captureCallback(image, resolvedSettings)
     }
     
-    private func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         let faceMetadataObjects = metadataObjects.filter({ $0.type == .face })
         
         if faceMetadataObjects.count > self.faceDetectionBoxes.count {

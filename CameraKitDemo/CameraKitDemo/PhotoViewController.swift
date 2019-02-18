@@ -166,8 +166,10 @@ class PhotoViewController: UIViewController, CKSessionDelegate {
     
     @IBAction func handleCapture(_ sender: Any) {
         if let session = self.previewView.session as? CKPhotoSession {
-            session.capture { (image, _, _) in
+            session.capture({ (image, _) in
                 self.performSegue(withIdentifier: "Preview", sender: image)
+            }) { (_) in
+                //
             }
         }
     }

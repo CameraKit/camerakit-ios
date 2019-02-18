@@ -36,8 +36,7 @@ import AVFoundation
         }
     }
     
-    // TODO: Fix mark as @objc
-    private(set) public var gridView: CKGridView? {
+    @objc private(set) public var gridView: CKGridView? {
         didSet {
             oldValue?.removeFromSuperview()
             

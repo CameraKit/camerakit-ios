@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
+
 @import CameraKit;
 
 @interface ViewController ()
@@ -25,8 +26,6 @@
     
     CKPhotoSession *session = [[CKPhotoSession alloc] initWithPosition:CameraPositionBack detection:CameraDetectionNone];
     previewView.session = session;
-    previewView.showGrid = YES;
 }
-
 
 @end

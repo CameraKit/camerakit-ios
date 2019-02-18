@@ -21,8 +21,6 @@ extension CKSession.FlashMode {
 
 @objc public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     
-    public typealias RecordCallback = (URL?, CKError?) -> Void
-    
     @objc public private(set) var isRecording = false
     
     @objc public var cameraPosition = CameraPosition.back {
@@ -88,8 +86,6 @@ extension CKSession.FlashMode {
     
     let movieOutput = AVCaptureMovieFileOutput()
     
-    var recordCallback: RecordCallback?
-    
     @objc public init(position: CameraPosition = .back) {
         super.init()
         
@@ -108,10 +104,14 @@ extension CKSession.FlashMode {
         self.session.addOutput(self.movieOutput)
     }
     
-    // TODO: Fix mark as @objc
-    public func record(url: URL? = nil, _ callback: @escaping RecordCallback) {
+    var recordCallback: (URL) -> Void = { (_) in }
+    var errorCallback: (Error) -> Void = { (_) in }
+    
+    @objc public func record(url: URL? = nil, _ callback: @escaping (URL) -> Void, error: @escaping (Error) -> Void) {
         if self.isRecording { return }
+        
         self.recordCallback = callback
+        self.errorCallback = error
         
         let fileUrl: URL = url ?? {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -158,17 +158,16 @@ extension CKSession.FlashMode {
     public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         self.isRecording = false
         
-        guard let recordCallback = self.recordCallback else {
-            return
+        defer {
+            self.recordCallback = { (_) in }
+            self.errorCallback = { (_) in }
         }
-        
-        defer { self.recordCallback = nil }
         
         if let error = error {
-            recordCallback(nil, CKError.error(error.localizedDescription))
+            self.errorCallback(error)
             return
         }
         
-        recordCallback(outputFileURL, nil)
+        self.recordCallback(outputFileURL)
     }
 }
