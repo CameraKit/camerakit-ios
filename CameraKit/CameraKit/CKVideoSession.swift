@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-extension CKVideoSession.FlashMode {
+extension CKSession.FlashMode {
     
     var captureTorchMode: AVCaptureDevice.TorchMode {
         switch self {
@@ -19,17 +19,11 @@ extension CKVideoSession.FlashMode {
     }
 }
 
-public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
+@objc public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     
-    public enum FlashMode {
-        case off, on, auto
-    }
+    @objc public private(set) var isRecording = false
     
-    public typealias RecordCallback = (URL?, CKError?) -> Void
-    
-    public private(set) var isRecording = false
-    
-    public var cameraPosition = CameraPosition.back {
+    @objc public var cameraPosition = CameraPosition.back {
         didSet {
             do {
                 let deviceInput = try CKSession.captureDeviceInput(type: self.cameraPosition.deviceType)
@@ -52,7 +46,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    public override var zoom: Double {
+    @objc public override var zoom: Double {
         didSet {
             guard let device = self.captureDeviceInput?.device else {
                 return
@@ -72,7 +66,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    public var flashMode = FlashMode.off {
+    @objc public var flashMode = CKSession.FlashMode.off {
         didSet {
             guard let device = self.captureDeviceInput?.device else {
                 return
@@ -92,9 +86,7 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     
     let movieOutput = AVCaptureMovieFileOutput()
     
-    var recordCallback: RecordCallback?
-    
-    public init(position: CameraPosition = .back) {
+    @objc public init(position: CameraPosition = .back) {
         super.init()
         
         defer {
@@ -112,9 +104,14 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         self.session.addOutput(self.movieOutput)
     }
     
-    public func record(url: URL? = nil, _ callback: @escaping RecordCallback) {
+    var recordCallback: (URL) -> Void = { (_) in }
+    var errorCallback: (Error) -> Void = { (_) in }
+    
+    @objc public func record(url: URL? = nil, _ callback: @escaping (URL) -> Void, error: @escaping (Error) -> Void) {
         if self.isRecording { return }
+        
         self.recordCallback = callback
+        self.errorCallback = error
         
         let fileUrl: URL = url ?? {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -126,16 +123,16 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
         self.movieOutput.startRecording(to: fileUrl, recordingDelegate: self)
     }
     
-    public func stopRecording() {
+    @objc public func stopRecording() {
         if !self.isRecording { return }
         self.movieOutput.stopRecording()
     }
     
-    public func togglePosition() {
+    @objc public func togglePosition() {
         self.cameraPosition = self.cameraPosition == .back ? .front : .back
     }
     
-    public func setWidth(_ width: Int, height: Int, frameRate: Int) {
+    @objc public func setWidth(_ width: Int, height: Int, frameRate: Int) {
         guard
             let input = self.captureDeviceInput,
             let format = CKSession.deviceInputFormat(input: input, width: width, height: height, frameRate: frameRate)
@@ -161,17 +158,16 @@ public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
     public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         self.isRecording = false
         
-        guard let recordCallback = self.recordCallback else {
-            return
+        defer {
+            self.recordCallback = { (_) in }
+            self.errorCallback = { (_) in }
         }
-        
-        defer { self.recordCallback = nil }
         
         if let error = error {
-            recordCallback(nil, CKError.error(error.localizedDescription))
+            self.errorCallback(error)
             return
         }
         
-        recordCallback(outputFileURL, nil)
+        self.recordCallback(outputFileURL)
     }
 }

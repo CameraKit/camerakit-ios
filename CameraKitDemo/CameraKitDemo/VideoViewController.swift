@@ -152,8 +152,10 @@ class VideoViewController: UIViewController, CKSessionDelegate {
                 session.stopRecording()
             } else {
                 sender.backgroundColor = UIColor.red
-                session.record { (url, _) in
+                session.record({ (url) in
                     self.performSegue(withIdentifier: "Preview", sender: url)
+                }) { (_) in
+                    //
                 }
             }
         }
