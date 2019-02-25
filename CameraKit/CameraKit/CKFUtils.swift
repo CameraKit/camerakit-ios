@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class CKUtils: NSObject {
+@objc public class CKFUtils: NSObject {
     
     @objc public static func cropAndScale(_ image: UIImage, width: Int, height: Int) -> UIImage? {
         let fromRect = CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width)
