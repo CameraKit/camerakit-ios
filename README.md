@@ -6,10 +6,10 @@
 
 <p align="center">
     <a href="https://spectrum.chat/camerakit/">
-        <img alt="Join Spectrum" height="42px" src=".repo/gh-readme-spectrum-button.svg" >
+        <img alt="Join Spectrum" height="42px" src=".repo/gh-readme-spectrum-button.svg" />
     </a>
     <a href="https://buddy.works/" target="_blank">
-        <img alt='Buddy.Works' height="41px" src='https://assets.buddy.works/automated-dark.svg'/>
+        <img alt='Buddy.Works' height="41px" src='https://assets.buddy.works/automated-dark.svg' />
     </a>
 </p>
 
