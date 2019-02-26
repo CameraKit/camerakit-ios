@@ -21,6 +21,7 @@ With CameraKit you are able to effortlessly do the following:
 - ✅ Image and video capture seamlessly working with the same preview session.
 - ✅ Automatic system permission handling.
 - ✅ Automatic preview scaling.
+- ✅ Automatic preview/image/video output orientation handling.
 - 📷 Ability to set a custom resolution for capturing photos.
 - 📹 Ability to set resolution/frame rate for capturing videos.
 - 👱‍ Built-in face detection.

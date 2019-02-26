@@ -60,6 +60,14 @@ import AVFoundation
         }
     }
     
+    @objc public var autorotate: Bool = false {
+        didSet {
+            if !self.autorotate {
+                self.previewLayer?.connection?.videoOrientation = .portrait
+            }
+        }
+    }
+    
     @objc public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -102,5 +110,9 @@ import AVFoundation
         super.layoutSubviews()
         self.previewLayer?.frame = self.bounds
         self.gridView?.frame = self.bounds
+        
+        if self.autorotate {
+            self.previewLayer?.connection?.videoOrientation = UIDevice.current.orientation.videoOrientation
+        }
     }
 }

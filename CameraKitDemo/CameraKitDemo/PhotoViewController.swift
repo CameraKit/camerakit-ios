@@ -125,6 +125,7 @@ class PhotoViewController: UIViewController, CKFSessionDelegate {
             session.resolution = CGSize(width: 3024, height: 4032)
             session.delegate = self
             
+            self.previewView.autorotate = true
             self.previewView.session = session
             self.previewView.previewLayer?.videoGravity = .resizeAspectFill
         }
