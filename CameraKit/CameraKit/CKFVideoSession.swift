@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-extension CKSession.FlashMode {
+extension CKFSession.FlashMode {
     
     var captureTorchMode: AVCaptureDevice.TorchMode {
         switch self {
@@ -19,14 +19,14 @@ extension CKSession.FlashMode {
     }
 }
 
-@objc public class CKVideoSession: CKSession, AVCaptureFileOutputRecordingDelegate {
+@objc public class CKFVideoSession: CKFSession, AVCaptureFileOutputRecordingDelegate {
     
     @objc public private(set) var isRecording = false
     
     @objc public var cameraPosition = CameraPosition.back {
         didSet {
             do {
-                let deviceInput = try CKSession.captureDeviceInput(type: self.cameraPosition.deviceType)
+                let deviceInput = try CKFSession.captureDeviceInput(type: self.cameraPosition.deviceType)
                 self.captureDeviceInput = deviceInput
             } catch let error {
                 print(error.localizedDescription)
@@ -66,7 +66,7 @@ extension CKSession.FlashMode {
         }
     }
     
-    @objc public var flashMode = CKSession.FlashMode.off {
+    @objc public var flashMode = CKFSession.FlashMode.off {
         didSet {
             guard let device = self.captureDeviceInput?.device else {
                 return
@@ -93,7 +93,7 @@ extension CKSession.FlashMode {
             self.cameraPosition = position
             
             do {
-                let microphoneInput = try CKSession.captureDeviceInput(type: .microphone)
+                let microphoneInput = try CKFSession.captureDeviceInput(type: .microphone)
                 self.session.addInput(microphoneInput)
             } catch let error {
                 print(error.localizedDescription)
@@ -135,7 +135,7 @@ extension CKSession.FlashMode {
     @objc public func setWidth(_ width: Int, height: Int, frameRate: Int) {
         guard
             let input = self.captureDeviceInput,
-            let format = CKSession.deviceInputFormat(input: input, width: width, height: height, frameRate: frameRate)
+            let format = CKFSession.deviceInputFormat(input: input, width: width, height: height, frameRate: frameRate)
         else {
             return
         }

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-extension CKSession.FlashMode {
+extension CKFSession.FlashMode {
     
     var captureFlashMode: AVCaptureDevice.FlashMode {
         switch self {
@@ -20,7 +20,7 @@ extension CKSession.FlashMode {
     }
 }
 
-@objc public class CKPhotoSession: CKSession, AVCapturePhotoCaptureDelegate, AVCaptureMetadataOutputObjectsDelegate {
+@objc public class CKFPhotoSession: CKFSession, AVCapturePhotoCaptureDelegate, AVCaptureMetadataOutputObjectsDelegate {
     
     @objc public enum CameraDetection: UInt {
         case none, faces
@@ -29,7 +29,7 @@ extension CKSession.FlashMode {
     @objc public var cameraPosition = CameraPosition.back {
         didSet {
             do {
-                let deviceInput = try CKSession.captureDeviceInput(type: self.cameraPosition.deviceType)
+                let deviceInput = try CKFSession.captureDeviceInput(type: self.cameraPosition.deviceType)
                 self.captureDeviceInput = deviceInput
             } catch let error {
                 print(error.localizedDescription)
@@ -62,7 +62,7 @@ extension CKSession.FlashMode {
         }
     }
     
-    @objc public var flashMode = CKSession.FlashMode.off
+    @objc public var flashMode = CKFSession.FlashMode.off
     
     var captureDeviceInput: AVCaptureDeviceInput? {
         didSet {
@@ -147,7 +147,7 @@ extension CKSession.FlashMode {
                 
                 if
                     self.resolution.width > 0, self.resolution.height > 0,
-                    let format = CKSession.deviceInputFormat(input: deviceInput, width: Int(self.resolution.width), height: Int(self.resolution.height))
+                    let format = CKFSession.deviceInputFormat(input: deviceInput, width: Int(self.resolution.width), height: Int(self.resolution.height))
                 {
                     deviceInput.device.activeFormat = format
                 } else {
@@ -187,7 +187,7 @@ extension CKSession.FlashMode {
         }
 
         guard let data = photo.fileDataRepresentation() else {
-            self.errorCallback(CKError.error("Cannot get photo file data representation"))
+            self.errorCallback(CKFError.error("Cannot get photo file data representation"))
             return
         }
 
@@ -209,7 +209,7 @@ extension CKSession.FlashMode {
             let photoSampleBuffer = photoSampleBuffer, let previewPhotoSampleBuffer = previewPhotoSampleBuffer,
             let data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) else
         {
-            self.errorCallback(CKError.error("Cannot get photo file data representation"))
+            self.errorCallback(CKFError.error("Cannot get photo file data representation"))
             return
         }
 
@@ -218,13 +218,13 @@ extension CKSession.FlashMode {
     
     private func processPhotoData(data: Data, resolvedSettings: AVCaptureResolvedPhotoSettings) {
         guard let image = UIImage(data: data) else {
-            self.errorCallback(CKError.error("Cannot get photo"))
+            self.errorCallback(CKFError.error("Cannot get photo"))
             return
         }
 
         if
             self.resolution.width > 0, self.resolution.height > 0,
-            let transformedImage = CKUtils.cropAndScale(image, width: Int(self.resolution.width), height: Int(self.resolution.height))
+            let transformedImage = CKFUtils.cropAndScale(image, width: Int(self.resolution.width), height: Int(self.resolution.height))
         {
             self.captureCallback(transformedImage, resolvedSettings)
             return

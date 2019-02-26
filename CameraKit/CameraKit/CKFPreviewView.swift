@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-@objc public class CKPreviewView: UIView {
+@objc public class CKFPreviewView: UIView {
     
     private var lastScale: CGFloat = 1.0
     
@@ -23,7 +23,7 @@ import AVFoundation
         }
     }
     
-    @objc public var session: CKSession? {
+    @objc public var session: CKFSession? {
         didSet {
             oldValue?.stop()
             
@@ -36,7 +36,7 @@ import AVFoundation
         }
     }
     
-    @objc private(set) public var gridView: CKGridView? {
+    @objc private(set) public var gridView: CKFGridView? {
         didSet {
             oldValue?.removeFromSuperview()
             
@@ -53,7 +53,7 @@ import AVFoundation
             }
             
             if self.showGrid {
-                self.gridView = CKGridView(frame: self.bounds)
+                self.gridView = CKFGridView(frame: self.bounds)
             } else {
                 self.gridView = nil
             }

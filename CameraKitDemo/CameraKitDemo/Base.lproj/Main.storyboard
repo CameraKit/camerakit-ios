@@ -21,7 +21,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UD-h8-yNR">
                                 <rect key="frame" x="0.0" y="20" width="320" height="428"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-in-aex" customClass="CKPreviewView" customModule="CameraKit">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-in-aex" customClass="CKFPreviewView" customModule="CameraKit">
                                         <rect key="frame" x="0.0" y="0.5" width="320" height="427"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -566,7 +566,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5V-hZ-kXh">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD4-vr-3Ay" customClass="CKPreviewView" customModule="CameraKit">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD4-vr-3Ay" customClass="CKFPreviewView" customModule="CameraKit">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>

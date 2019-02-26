@@ -49,7 +49,7 @@ class PhotoSettingsViewController: UITableViewController {
     
     var squareLayoutConstraint: NSLayoutConstraint!
     var wideLayoutConstraint: NSLayoutConstraint!
-    var previewView: CKPreviewView!
+    var previewView: CKFPreviewView!
     
     @IBOutlet weak var cameraSegmentControl: UISegmentedControl!
     @IBOutlet weak var flashSegmentControl: UISegmentedControl!
@@ -58,20 +58,20 @@ class PhotoSettingsViewController: UITableViewController {
     @IBOutlet weak var modeSegmentControl: UISegmentedControl!
     
     @IBAction func handleCamera(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKPhotoSession {
+        if let session = self.previewView.session as? CKFPhotoSession {
             session.cameraPosition = sender.selectedSegmentIndex == 0 ? .back : .front
         }
     }
     
     @IBAction func handleFlash(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKPhotoSession {
-            let values: [CKPhotoSession.FlashMode] = [.auto, .on, .off]
+        if let session = self.previewView.session as? CKFPhotoSession {
+            let values: [CKFPhotoSession.FlashMode] = [.auto, .on, .off]
             session.flashMode = values[sender.selectedSegmentIndex]
         }
     }
     
     @IBAction func handleFace(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKPhotoSession {
+        if let session = self.previewView.session as? CKFPhotoSession {
             session.cameraDetection = sender.selectedSegmentIndex == 0 ? .none : .faces
         }
     }
@@ -81,7 +81,7 @@ class PhotoSettingsViewController: UITableViewController {
     }
     
     @IBAction func handleMode(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKPhotoSession {
+        if let session = self.previewView.session as? CKFPhotoSession {
             if sender.selectedSegmentIndex == 0 {
                 session.resolution = CGSize(width: 3024, height: 4032)
                 self.squareLayoutConstraint.priority = .defaultLow
@@ -95,7 +95,7 @@ class PhotoSettingsViewController: UITableViewController {
     }
 }
 
-class PhotoViewController: UIViewController, CKSessionDelegate {
+class PhotoViewController: UIViewController, CKFSessionDelegate {
     
     @IBOutlet weak var squareLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var wideLayoutConstraint: NSLayoutConstraint!
@@ -103,7 +103,7 @@ class PhotoViewController: UIViewController, CKSessionDelegate {
     @IBOutlet weak var zoomLabel: UILabel!
     @IBOutlet weak var captureButton: UIButton!
     
-    func didChangeValue(session: CKSession, value: Any, key: String) {
+    func didChangeValue(session: CKFSession, value: Any, key: String) {
         if key == "zoom" {
             self.zoomLabel.text = String(format: "%.1fx", value as! Double)
         }
@@ -119,9 +119,9 @@ class PhotoViewController: UIViewController, CKSessionDelegate {
         }
     }
     
-    @IBOutlet weak var previewView: CKPreviewView! {
+    @IBOutlet weak var previewView: CKFPreviewView! {
         didSet {
-            let session = CKPhotoSession()
+            let session = CKFPhotoSession()
             session.resolution = CGSize(width: 3024, height: 4032)
             session.delegate = self
             
@@ -165,7 +165,7 @@ class PhotoViewController: UIViewController, CKSessionDelegate {
     }
     
     @IBAction func handleCapture(_ sender: Any) {
-        if let session = self.previewView.session as? CKPhotoSession {
+        if let session = self.previewView.session as? CKFPhotoSession {
             session.capture({ (image, _) in
                 self.performSegue(withIdentifier: "Preview", sender: image)
             }) { (_) in

@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-private extension CKSession.DeviceType {
+private extension CKFSession.DeviceType {
     
     var captureDeviceType: AVCaptureDevice.DeviceType {
         switch self {
@@ -40,8 +40,8 @@ private extension CKSession.DeviceType {
     }
 }
 
-extension CKSession.CameraPosition {
-    var deviceType: CKSession.DeviceType {
+extension CKFSession.CameraPosition {
+    var deviceType: CKFSession.DeviceType {
         switch self {
         case .back:
             return .backCamera
@@ -51,11 +51,11 @@ extension CKSession.CameraPosition {
     }
 }
 
-@objc public protocol CKSessionDelegate: class {
-    @objc func didChangeValue(session: CKSession, value: Any, key: String)
+@objc public protocol CKFSessionDelegate: class {
+    @objc func didChangeValue(session: CKFSession, value: Any, key: String)
 }
 
-@objc public class CKSession: NSObject {
+@objc public class CKFSession: NSObject {
     
     @objc public enum DeviceType: UInt {
         case frontCamera, backCamera, microphone
@@ -76,7 +76,7 @@ extension CKSession.CameraPosition {
     
     @objc public var zoom = 1.0
     
-    @objc public weak var delegate: CKSessionDelegate?
+    @objc public weak var delegate: CKFSessionDelegate?
     
     @objc override init() {
         self.session = AVCaptureSession()
@@ -105,7 +105,7 @@ extension CKSession.CameraPosition {
             position: type.capturePosition)
         
         guard let captureDevice = captureDevices.devices.first else {
-            throw CKError.captureDeviceNotFound
+            throw CKFError.captureDeviceNotFound
         }
         
         return try AVCaptureDeviceInput(device: captureDevice)

@@ -6,10 +6,10 @@
 
 <p align="center">
     <a href="https://spectrum.chat/camerakit/">
-        <img alt="Join Spectrum" height="42px" src=".repo/gh-readme-spectrum-button.svg" >
+        <img alt="Join Spectrum" height="42px" src=".repo/gh-readme-spectrum-button.svg" />
     </a>
     <a href="https://buddy.works/" target="_blank">
-        <img alt='Buddy.Works' height="41px" src='https://assets.buddy.works/automated-dark.svg'/>
+        <img alt='Buddy.Works' height="41px" src='https://assets.buddy.works/automated-dark.svg' />
     </a>
 </p>
 
@@ -112,17 +112,17 @@ override func viewDidLoad() {
     super.viewDidLoad()
 
     // Init a photo capture session
-    let session = CKPhotoSession()
+    let session = CKFPhotoSession()
     
-    // Use CKVideoSession for video capture
-    // let session = CKVideoSession()
+    // Use CKFVideoSession for video capture
+    // let session = CKFVideoSession()
     
-    let previewView = CKPreviewView(frame: self.view.bounds)
+    let previewView = CKFPreviewView(frame: self.view.bounds)
     previewView.session = session
 }
 ```
 
-For capturing a image using the `CKPhotoSession` class use this code below:
+For capturing a image using the `CKFPhotoSession` class use this code below:
 
 ```swift
 session.capture({ (image, settings) in
@@ -132,7 +132,7 @@ session.capture({ (image, settings) in
 }
 ```
 
-If you want to record a video using the `CKVideoSession` class use this code below to start the recording:
+If you want to record a video using the `CKFVideoSession` class use this code below to start the recording:
 
 ```swift
 // You can also specify a custom url for where to save the video file
@@ -154,7 +154,7 @@ You can get the current record status via the `isRecording` property to determin
 
 # Session properties and methods
 
-| CKPhotoSession | CKVideoSession |
+| CKFPhotoSession | CKFVideoSession |
 |----------------|----------------|
 | `zoom: Double` | `zoom: Double` |
 | `resolution: CGSize` | `isRecording: Bool` |
@@ -179,16 +179,16 @@ Then import the CameraKit framework using:
 
 # Creating custom sessions
 
-CameraKit can be splitted into 2 main pieces: preview and sessions. The sessions are made by extending the base `CKSession` class. If you want a custom session you can extend the `CKSession` class and use its static helpers to initialize yours. Or you can also extend the built-in sessions and add custom logic.
+CameraKit can be splitted into 2 main pieces: preview and sessions. The sessions are made by extending the base `CKFSession` class. If you want a custom session you can extend the `CKFSession` class and use its static helpers to initialize yours. Or you can also extend the built-in sessions and add custom logic.
 
 ```swift
-class MyCustomSession: CKSession {
+class MyCustomSession: CKFSession {
 
     public override init() {
         super.init()
         
         do {
-            let deviceInput = try CKSession.captureDeviceInput(type: .backCamera)
+            let deviceInput = try CKFSession.captureDeviceInput(type: .backCamera)
             self.session.addInput(deviceInput)
         } catch let error {
             print(error.localizedDescription)

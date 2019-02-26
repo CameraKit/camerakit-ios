@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class CKGridView: UIView {
+@objc public class CKFGridView: UIView {
     
     @objc public var color: UIColor = UIColor.white.withAlphaComponent(0.5) {
         didSet {

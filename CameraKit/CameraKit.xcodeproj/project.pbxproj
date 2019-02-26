@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A47096321F21173004F4B8D /* CKGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47096221F21173004F4B8D /* CKGridView.swift */; };
-		3A4E8BCF21F8E8D600CAC6F2 /* CKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BCE21F8E8D600CAC6F2 /* CKUtils.swift */; };
-		3A76E33D21E549B800C8461D /* CKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76E33C21E549B800C8461D /* CKSession.swift */; };
-		3A76E33F21E54AC000C8461D /* CKPhotoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76E33E21E54AC000C8461D /* CKPhotoSession.swift */; };
-		3AC2453521E62AD600785FB2 /* CKVideoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2453421E62AD600785FB2 /* CKVideoSession.swift */; };
+		3A47096321F21173004F4B8D /* CKFGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47096221F21173004F4B8D /* CKFGridView.swift */; };
+		3A4E8BCF21F8E8D600CAC6F2 /* CKFUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BCE21F8E8D600CAC6F2 /* CKFUtils.swift */; };
+		3A76E33D21E549B800C8461D /* CKFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76E33C21E549B800C8461D /* CKFSession.swift */; };
+		3A76E33F21E54AC000C8461D /* CKFPhotoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76E33E21E54AC000C8461D /* CKFPhotoSession.swift */; };
+		3AC2453521E62AD600785FB2 /* CKFVideoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2453421E62AD600785FB2 /* CKFVideoSession.swift */; };
 		3AD9372B21E53B97006A8C86 /* CameraKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9372121E53B97006A8C86 /* CameraKit.framework */; };
 		3AD9373021E53B97006A8C86 /* CameraKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9372F21E53B97006A8C86 /* CameraKitTests.swift */; };
 		3AD9373221E53B97006A8C86 /* CameraKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD9372421E53B97006A8C86 /* CameraKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AD9375F21E53F81006A8C86 /* CKPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9375C21E53C61006A8C86 /* CKPreviewView.swift */; };
-		3ADDEE7921E75A4E00EEF063 /* CKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDEE7821E75A4E00EEF063 /* CKError.swift */; };
+		3AD9375F21E53F81006A8C86 /* CKFPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9375C21E53C61006A8C86 /* CKFPreviewView.swift */; };
+		3ADDEE7921E75A4E00EEF063 /* CKFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDEE7821E75A4E00EEF063 /* CKFError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,19 +30,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A47096221F21173004F4B8D /* CKGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKGridView.swift; sourceTree = "<group>"; };
-		3A4E8BCE21F8E8D600CAC6F2 /* CKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUtils.swift; sourceTree = "<group>"; };
-		3A76E33C21E549B800C8461D /* CKSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSession.swift; sourceTree = "<group>"; };
-		3A76E33E21E54AC000C8461D /* CKPhotoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPhotoSession.swift; sourceTree = "<group>"; };
-		3AC2453421E62AD600785FB2 /* CKVideoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKVideoSession.swift; sourceTree = "<group>"; };
+		3A47096221F21173004F4B8D /* CKFGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFGridView.swift; sourceTree = "<group>"; };
+		3A4E8BCE21F8E8D600CAC6F2 /* CKFUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFUtils.swift; sourceTree = "<group>"; };
+		3A76E33C21E549B800C8461D /* CKFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFSession.swift; sourceTree = "<group>"; };
+		3A76E33E21E54AC000C8461D /* CKFPhotoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFPhotoSession.swift; sourceTree = "<group>"; };
+		3AC2453421E62AD600785FB2 /* CKFVideoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFVideoSession.swift; sourceTree = "<group>"; };
 		3AD9372121E53B97006A8C86 /* CameraKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CameraKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD9372421E53B97006A8C86 /* CameraKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraKit.h; sourceTree = "<group>"; };
 		3AD9372521E53B97006A8C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AD9372A21E53B97006A8C86 /* CameraKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD9372F21E53B97006A8C86 /* CameraKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraKitTests.swift; sourceTree = "<group>"; };
 		3AD9373121E53B97006A8C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AD9375C21E53C61006A8C86 /* CKPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPreviewView.swift; sourceTree = "<group>"; };
-		3ADDEE7821E75A4E00EEF063 /* CKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKError.swift; sourceTree = "<group>"; };
+		3AD9375C21E53C61006A8C86 /* CKFPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFPreviewView.swift; sourceTree = "<group>"; };
+		3ADDEE7821E75A4E00EEF063 /* CKFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +85,13 @@
 		3AD9372321E53B97006A8C86 /* CameraKit */ = {
 			isa = PBXGroup;
 			children = (
-				3AD9375C21E53C61006A8C86 /* CKPreviewView.swift */,
-				3A47096221F21173004F4B8D /* CKGridView.swift */,
-				3A76E33C21E549B800C8461D /* CKSession.swift */,
-				3A76E33E21E54AC000C8461D /* CKPhotoSession.swift */,
-				3AC2453421E62AD600785FB2 /* CKVideoSession.swift */,
-				3ADDEE7821E75A4E00EEF063 /* CKError.swift */,
-				3A4E8BCE21F8E8D600CAC6F2 /* CKUtils.swift */,
+				3AD9375C21E53C61006A8C86 /* CKFPreviewView.swift */,
+				3A47096221F21173004F4B8D /* CKFGridView.swift */,
+				3A76E33C21E549B800C8461D /* CKFSession.swift */,
+				3A76E33E21E54AC000C8461D /* CKFPhotoSession.swift */,
+				3AC2453421E62AD600785FB2 /* CKFVideoSession.swift */,
+				3ADDEE7821E75A4E00EEF063 /* CKFError.swift */,
+				3A4E8BCE21F8E8D600CAC6F2 /* CKFUtils.swift */,
 				3AD9372421E53B97006A8C86 /* CameraKit.h */,
 				3AD9372521E53B97006A8C86 /* Info.plist */,
 			);
@@ -216,13 +216,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AC2453521E62AD600785FB2 /* CKVideoSession.swift in Sources */,
-				3ADDEE7921E75A4E00EEF063 /* CKError.swift in Sources */,
-				3A76E33D21E549B800C8461D /* CKSession.swift in Sources */,
-				3AD9375F21E53F81006A8C86 /* CKPreviewView.swift in Sources */,
-				3A47096321F21173004F4B8D /* CKGridView.swift in Sources */,
-				3A4E8BCF21F8E8D600CAC6F2 /* CKUtils.swift in Sources */,
-				3A76E33F21E54AC000C8461D /* CKPhotoSession.swift in Sources */,
+				3AC2453521E62AD600785FB2 /* CKFVideoSession.swift in Sources */,
+				3ADDEE7921E75A4E00EEF063 /* CKFError.swift in Sources */,
+				3A76E33D21E549B800C8461D /* CKFSession.swift in Sources */,
+				3AD9375F21E53F81006A8C86 /* CKFPreviewView.swift in Sources */,
+				3A47096321F21173004F4B8D /* CKFGridView.swift in Sources */,
+				3A4E8BCF21F8E8D600CAC6F2 /* CKFUtils.swift in Sources */,
+				3A76E33F21E54AC000C8461D /* CKFPhotoSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

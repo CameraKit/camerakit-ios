@@ -20,11 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CKPreviewView *previewView = [[CKPreviewView alloc] initWithFrame:self.view.bounds];
+    CKFPreviewView *previewView = [[CKFPreviewView alloc] initWithFrame:self.view.bounds];
     previewView.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.view addSubview:previewView];
     
-    CKPhotoSession *session = [[CKPhotoSession alloc] initWithPosition:CameraPositionBack detection:CameraDetectionNone];
+    CKFPhotoSession *session = [[CKFPhotoSession alloc] initWithPosition:CameraPositionBack detection:CameraDetectionNone];
     previewView.session = session;
 }
 
