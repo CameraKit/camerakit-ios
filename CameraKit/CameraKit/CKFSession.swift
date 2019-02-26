@@ -8,6 +8,22 @@
 
 import AVFoundation
 
+public extension UIDeviceOrientation {
+    
+    var videoOrientation: AVCaptureVideoOrientation {
+        switch UIDevice.current.orientation {
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .landscapeLeft:
+            return .landscapeRight
+        case .landscapeRight:
+            return .landscapeLeft
+        default:
+            return .portrait
+        }
+    }
+}
+
 private extension CKFSession.DeviceType {
     
     var captureDeviceType: AVCaptureDevice.DeviceType {
