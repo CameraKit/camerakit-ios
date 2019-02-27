@@ -50,21 +50,21 @@ class VideoPreviewViewController: UIViewController {
 
 class VideoSettingsViewController: UITableViewController {
     
-    var previewView: CKPreviewView!
+    var previewView: CKFPreviewView!
     
     @IBOutlet weak var cameraSegmentControl: UISegmentedControl!
     @IBOutlet weak var flashSegmentControl: UISegmentedControl!
     @IBOutlet weak var gridSegmentControl: UISegmentedControl!
     
     @IBAction func handleCamera(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKVideoSession {
+        if let session = self.previewView.session as? CKFVideoSession {
             session.cameraPosition = sender.selectedSegmentIndex == 0 ? .back : .front
         }
     }
     
     @IBAction func handleFlash(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKVideoSession {
-            let values: [CKVideoSession.FlashMode] = [.auto, .on, .off]
+        if let session = self.previewView.session as? CKFVideoSession {
+            let values: [CKFVideoSession.FlashMode] = [.auto, .on, .off]
             session.flashMode = values[sender.selectedSegmentIndex]
         }
     }
@@ -74,7 +74,7 @@ class VideoSettingsViewController: UITableViewController {
     }
     
     @IBAction func handleMode(_ sender: UISegmentedControl) {
-        if let session = self.previewView.session as? CKVideoSession {
+        if let session = self.previewView.session as? CKFVideoSession {
             let modes = [(1920, 1080, 30), (1920, 1080, 60), (3840, 2160, 30)]
             let mode = modes[sender.selectedSegmentIndex]
             session.setWidth(mode.0, height: mode.1, frameRate: mode.2)
@@ -82,12 +82,12 @@ class VideoSettingsViewController: UITableViewController {
     }
 }
 
-class VideoViewController: UIViewController, CKSessionDelegate {
+class VideoViewController: UIViewController, CKFSessionDelegate {
     
     @IBOutlet weak var zoomLabel: UILabel!
     @IBOutlet weak var captureButton: UIButton!
     
-    func didChangeValue(session: CKSession, value: Any, key: String) {
+    func didChangeValue(session: CKFSession, value: Any, key: String) {
         if key == "zoom" {
             self.zoomLabel.text = String(format: "%.1fx", value as! Double)
         }
@@ -101,11 +101,12 @@ class VideoViewController: UIViewController, CKSessionDelegate {
         }
     }
     
-    @IBOutlet weak var previewView: CKPreviewView! {
+    @IBOutlet weak var previewView: CKFPreviewView! {
         didSet {
-            let session = CKVideoSession()
+            let session = CKFVideoSession()
             session.delegate = self
             
+            self.previewView.autorotate = true
             self.previewView.session = session
             self.previewView.previewLayer?.videoGravity = .resizeAspectFill
         }
@@ -146,7 +147,7 @@ class VideoViewController: UIViewController, CKSessionDelegate {
     }
     
     @IBAction func handleCapture(_ sender: UIButton) {
-        if let session = self.previewView.session as? CKVideoSession {
+        if let session = self.previewView.session as? CKFVideoSession {
             if session.isRecording {
                 sender.backgroundColor = UIColor.red.withAlphaComponent(0.5)
                 session.stopRecording()

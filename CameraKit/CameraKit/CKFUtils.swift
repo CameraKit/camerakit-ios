@@ -8,9 +8,37 @@
 
 import UIKit
 
+private extension UIDeviceOrientation {
+    var imageOrientation: UIImageOrientation {
+        switch self {
+        case .portraitUpsideDown:
+            return .left
+        case .landscapeLeft:
+            return .up
+        case .landscapeRight:
+            return .down
+        default:
+            return .right
+        }
+    }
+    
+    var imageOrientationMirrored: UIImageOrientation {
+        switch self {
+        case .portraitUpsideDown:
+            return .left
+        case .landscapeLeft:
+            return .down
+        case .landscapeRight:
+            return .up
+        default:
+            return .right
+        }
+    }
+}
+
 @objc public class CKUtils: NSObject {
     
-    @objc public static func cropAndScale(_ image: UIImage, width: Int, height: Int) -> UIImage? {
+    @objc public static func cropAndScale(_ image: UIImage, width: Int, height: Int, orientation: UIDeviceOrientation, mirrored: Bool) -> UIImage? {
         let fromRect = CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width)
         var toRect = CGRect(x: 0, y: 0, width: height, height: width)
         
@@ -40,7 +68,8 @@ import UIKit
         guard let finalCgImage = context.makeImage() else {
             return nil
         }
-        
-        return UIImage(cgImage: finalCgImage, scale: 1.0, orientation: .right)
+
+        let orientation = mirrored ? orientation.imageOrientationMirrored : orientation.imageOrientation
+        return UIImage(cgImage: finalCgImage, scale: 1.0, orientation: orientation)
     }
 }
