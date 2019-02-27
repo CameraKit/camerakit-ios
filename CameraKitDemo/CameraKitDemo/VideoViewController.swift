@@ -106,6 +106,7 @@ class VideoViewController: UIViewController, CKFSessionDelegate {
             let session = CKFVideoSession()
             session.delegate = self
             
+            self.previewView.autorotate = true
             self.previewView.session = session
             self.previewView.previewLayer?.videoGravity = .resizeAspectFill
         }

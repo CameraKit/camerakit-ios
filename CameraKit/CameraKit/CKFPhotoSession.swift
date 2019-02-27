@@ -109,6 +109,14 @@ extension CKFSession.FlashMode {
         let settings = AVCapturePhotoSettings()
         settings.flashMode = self.flashMode.captureFlashMode
 
+        if let connection = self.photoOutput.connection(with: .video) {
+            if self.resolution.width > 0, self.resolution.height > 0 {
+                connection.videoOrientation = .portrait
+            } else {
+                connection.videoOrientation = UIDevice.current.orientation.videoOrientation
+            }
+        }
+        
         self.photoOutput.capturePhoto(with: settings, delegate: self)
     }
     
@@ -224,7 +232,7 @@ extension CKFSession.FlashMode {
 
         if
             self.resolution.width > 0, self.resolution.height > 0,
-            let transformedImage = CKFUtils.cropAndScale(image, width: Int(self.resolution.width), height: Int(self.resolution.height))
+            let transformedImage = CKUtils.cropAndScale(image, width: Int(self.resolution.width), height: Int(self.resolution.height), orientation: UIDevice.current.orientation, mirrored: self.cameraPosition == .front)
         {
             self.captureCallback(transformedImage, resolvedSettings)
             return

@@ -120,6 +120,10 @@ extension CKFSession.FlashMode {
             return fileUrl
         }()
         
+        if let connection = self.movieOutput.connection(with: .video) {
+            connection.videoOrientation = UIDevice.current.orientation.videoOrientation
+        }
+        
         self.movieOutput.startRecording(to: fileUrl, recordingDelegate: self)
     }
     

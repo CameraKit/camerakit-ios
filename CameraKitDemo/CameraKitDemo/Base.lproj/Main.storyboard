@@ -23,14 +23,13 @@
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-in-aex" customClass="CKFPreviewView" customModule="CameraKit">
                                         <rect key="frame" x="0.0" y="0.5" width="320" height="427"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="WrD-in-aex" secondAttribute="height" multiplier="1:1" priority="250" id="Rz4-OH-s48"/>
                                             <constraint firstAttribute="width" secondItem="WrD-in-aex" secondAttribute="height" multiplier="3:4" priority="750" id="jew-Fn-3S0"/>
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fmb-ws-sF8">
-                                        <rect key="frame" x="143.5" y="8.5" width="33" height="19"/>
+                                        <rect key="frame" x="143.5" y="8" width="33" height="19"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LW1-hd-LLC">
                                             <rect key="frame" x="0.0" y="0.0" width="33" height="19"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,9 +60,9 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WrD-in-aex" secondAttribute="trailing" id="1Zs-Th-7wt"/>
                                     <constraint firstItem="WrD-in-aex" firstAttribute="leading" secondItem="0UD-h8-yNR" secondAttribute="leading" id="Gfy-jQ-1k9"/>
+                                    <constraint firstItem="Fmb-ws-sF8" firstAttribute="top" secondItem="0UD-h8-yNR" secondAttribute="top" constant="8" id="Ld9-OC-Olo"/>
                                     <constraint firstItem="Fmb-ws-sF8" firstAttribute="centerX" secondItem="0UD-h8-yNR" secondAttribute="centerX" id="RbR-jl-KLK"/>
                                     <constraint firstItem="WrD-in-aex" firstAttribute="centerY" secondItem="0UD-h8-yNR" secondAttribute="centerY" id="XNk-AI-peP"/>
-                                    <constraint firstItem="Fmb-ws-sF8" firstAttribute="top" secondItem="WrD-in-aex" secondAttribute="top" constant="8" id="qdK-o4-1Y6"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cs9-hk-xYz">
@@ -568,7 +567,6 @@
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD4-vr-3Ay" customClass="CKFPreviewView" customModule="CameraKit">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geg-uJ-o6S">
                                         <rect key="frame" x="143.5" y="8" width="33" height="19"/>
