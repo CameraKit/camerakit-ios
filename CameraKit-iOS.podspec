@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
 
   s.name              = "CameraKit-iOS"
-  s.version           = "1.2.0"
+  s.version           = "1.2.1"
+  s.swift_version     = "5"
   s.summary           = "Camera library for iOS written in pure Swift."
   s.description       = "Easy to work with, camera library for iOS written in pure Swift."
   s.homepage          = "https://camerakit.io/"
