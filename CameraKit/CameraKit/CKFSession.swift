@@ -6,6 +6,7 @@
 //  Copyright © 2019 Wonderkiln. All rights reserved.
 //
 
+import UIKit
 import AVFoundation
 
 public extension UIDeviceOrientation {
