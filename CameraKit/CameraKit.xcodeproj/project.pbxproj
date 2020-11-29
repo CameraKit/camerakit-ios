@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3AD9372B21E53B97006A8C86 /* CameraKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9372121E53B97006A8C86 /* CameraKit.framework */; };
 		3AD9373021E53B97006A8C86 /* CameraKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9372F21E53B97006A8C86 /* CameraKitTests.swift */; };
-		3AD9373221E53B97006A8C86 /* CameraKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD9372421E53B97006A8C86 /* CameraKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,8 +23,6 @@
 
 /* Begin PBXFileReference section */
 		3AD9372121E53B97006A8C86 /* CameraKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CameraKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AD9372421E53B97006A8C86 /* CameraKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraKit.h; sourceTree = "<group>"; };
-		3AD9372521E53B97006A8C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AD9372A21E53B97006A8C86 /* CameraKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD9372F21E53B97006A8C86 /* CameraKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraKitTests.swift; sourceTree = "<group>"; };
 		3AD9373121E53B97006A8C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				3E9E5EAD2573ABFC0059E5A9 /* CameraKit */,
-				3AD9372321E53B97006A8C86 /* CameraKit */,
 				3AD9372E21E53B97006A8C86 /* CameraKitTests */,
 				3AD9372221E53B97006A8C86 /* Products */,
 			);
@@ -68,15 +64,6 @@
 				3AD9372A21E53B97006A8C86 /* CameraKitTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3AD9372321E53B97006A8C86 /* CameraKit */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9372421E53B97006A8C86 /* CameraKit.h */,
-				3AD9372521E53B97006A8C86 /* Info.plist */,
-			);
-			path = CameraKit;
 			sourceTree = "<group>";
 		};
 		3AD9372E21E53B97006A8C86 /* CameraKitTests */ = {
@@ -95,7 +82,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD9373221E53B97006A8C86 /* CameraKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
