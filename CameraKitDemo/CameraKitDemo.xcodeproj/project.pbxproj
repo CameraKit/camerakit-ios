@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A76E33721E5415600C8461D /* CameraKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9375A21E53C14006A8C86 /* CameraKit.framework */; };
-		3A76E33821E5415600C8461D /* CameraKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9375A21E53C14006A8C86 /* CameraKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A92F22021FF2AAC007E9BBE /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92F21F21FF2AAC007E9BBE /* UIView+Border.swift */; };
 		3A93779121F0B181007386E4 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A93779021F0B181007386E4 /* VideoViewController.swift */; };
 		3AD9374821E53BF2006A8C86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9374721E53BF2006A8C86 /* AppDelegate.swift */; };
@@ -16,21 +14,8 @@
 		3AD9374D21E53BF2006A8C86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AD9374B21E53BF2006A8C86 /* Main.storyboard */; };
 		3AD9374F21E53BF3006A8C86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD9374E21E53BF3006A8C86 /* Assets.xcassets */; };
 		3AD9375221E53BF3006A8C86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AD9375021E53BF3006A8C86 /* LaunchScreen.storyboard */; };
+		3E9E5EAF2573AC900059E5A9 /* CameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3E9E5EAE2573AC900059E5A9 /* CameraKit */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		3A76E33921E5415600C8461D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3A76E33821E5415600C8461D /* CameraKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A92F21F21FF2AAC007E9BBE /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
@@ -50,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A76E33721E5415600C8461D /* CameraKit.framework in Frameworks */,
+				3E9E5EAF2573AC900059E5A9 /* CameraKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,13 +92,15 @@
 				3AD9374021E53BF2006A8C86 /* Sources */,
 				3AD9374121E53BF2006A8C86 /* Frameworks */,
 				3AD9374221E53BF2006A8C86 /* Resources */,
-				3A76E33921E5415600C8461D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = CameraKitDemo;
+			packageProductDependencies = (
+				3E9E5EAE2573AC900059E5A9 /* CameraKit */,
+			);
 			productName = CameraKitDemo;
 			productReference = 3AD9374421E53BF2006A8C86 /* CameraKitDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -374,6 +361,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3E9E5EAE2573AC900059E5A9 /* CameraKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CameraKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3AD9373C21E53BF2006A8C86 /* Project object */;
 }
